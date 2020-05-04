@@ -22,6 +22,7 @@ export class LogFormComponent implements OnInit {
     //Subscribe to the selectedLog observable
     this.logService.selectedLog.subscribe((log) => {
       if (log.id !== null) {
+        this.isNew = false;
         this.id = log.id;
         this.text = log.text;
         this.date = log.date;
@@ -50,6 +51,17 @@ export class LogFormComponent implements OnInit {
       //update the log
       this.logService.updateLog(updLog);
     }
+
+    //clear the state
+    this.clearState();
+  }
+
+  clearState() {
+    this.isNew = true;
+    this.id = '';
+    this.text = '';
+    this.date = '';
+    this.logService.clearState();
   }
 
   generateId() {
